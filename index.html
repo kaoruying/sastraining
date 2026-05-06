@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>襄理主管力升級計畫</title>
+
+  <style>
+    :root {
+      --kgi-blue: #003b71;
+      --kgi-deep: #06152f;
+      --kgi-mid: #0b2e5f;
+      --kgi-light: #2f8cff;
+      --kgi-orange: #f6a623;
+      --kgi-gold: #ffd36a;
+      --white: #ffffff;
+      --soft-white: rgba(255, 255, 255, 0.86);
+      --muted: rgba(255, 255, 255, 0.68);
+      --card: rgba(255, 255, 255, 0.09);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47, 140, 255, 0.28), transparent 34%),
+        radial-gradient(circle at 80% 12%, rgba(246, 166, 35, 0.18), transparent 28%),
+        linear-gradient(145deg, #06152f 0%, #08285a 45%, #001f3f 100%);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 88%);
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 920px);
+      margin: 0 auto;
+      padding: 24px 18px 36px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 34px 0 26px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      right: -120px;
+      top: 110px;
+      background: radial-gradient(circle, rgba(246, 166, 35, 0.24), transparent 68%);
+      filter: blur(3px);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      color: var(--kgi-gold);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 211, 106, 0.36);
+      background: rgba(246, 166, 35, 0.09);
+      border-radius: 999px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--kgi-orange);
+      border-radius: 50%;
+      box-shadow: 0 0 14px var(--kgi-orange);
+    }
+
+    h1 {
+      font-size: clamp(36px, 11vw, 64px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      margin-bottom: 18px;
+      text-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff 0%, #dcecff 46%, #ffd36a 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(21px, 6vw, 32px);
+      line-height: 1.36;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .hero-desc {
+      color: var(--soft-white);
+      font-size: 16px;
+      line-height: 1.8;
+      max-width: 620px;
+      margin-bottom: 24px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 28px;
+    }
+
+    .tag {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff8e9;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(246, 166, 35, 0.28), rgba(47, 140, 255, 0.16));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    }
+
+    .cta {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      min-width: 190px;
+      min-height: 48px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      color: #071b39;
+      font-size: 16px;
+      font-weight: 900;
+      text-decoration: none;
+      background: linear-gradient(135deg, #ffd36a 0%, #f6a623 100%);
+      box-shadow: 0 12px 30px rgba(246, 166, 35, 0.32);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(246, 166, 35, 0.42);
+    }
+
+    .section-title {
+      font-size: clamp(25px, 7vw, 36px);
+      line-height: 1.22;
+      font-weight: 900;
+      margin-bottom: 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-lead {
+      color: var(--soft-white);
+      font-size: 15.5px;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .pain-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .pain-card {
+      position: relative;
+      padding: 18px 18px 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .pain-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 18px;
+      bottom: 18px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, var(--kgi-orange), var(--kgi-gold));
+    }
+
+    .pain-card h3 {
+      color: var(--kgi-gold);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .pain-card p {
+      color: var(--soft-white);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .highlight-box {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(47, 140, 255, 0.18), rgba(246, 166, 35, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .module-card {
+      position: relative;
+      padding: 20px;
+      border-radius: 26px;
+      background:
+        linear-gradient(150deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.055)),
+        radial-gradient(circle at top right, rgba(47, 140, 255, 0.22), transparent 42%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+      overflow: hidden;
+    }
+
+    .module-card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -60px;
+      bottom: -60px;
+      border-radius: 50%;
+      background: rgba(246, 166, 35, 0.18);
+      filter: blur(2px);
+    }
+
+    .module-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .num {
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ffd36a, #f6a623);
+      color: #071b39;
+      font-size: 15px;
+      font-weight: 900;
+      box-shadow: 0 10px 26px rgba(246, 166, 35, 0.26);
+    }
+
+    .module-card h3 {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .module-desc {
+      color: var(--soft-white);
+      font-size: 15.5px;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .course-label {
+      color: var(--kgi-gold);
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-tags span {
+      font-size: 12.5px;
+      line-height: 1;
+      color: #eaf4ff;
+      padding: 8px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .quote {
+      position: relative;
+      padding: 30px 20px;
+      border-radius: 30px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(246, 166, 35, 0.24), transparent 42%),
+        linear-gradient(155deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.055));
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 42px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .quote::before,
+    .quote::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255, 211, 106, 0.72), transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .quote::before {
+      top: 18px;
+    }
+
+    .quote::after {
+      bottom: 18px;
+    }
+
+    .quote h2 {
+      font-size: clamp(25px, 7.5vw, 38px);
+      line-height: 1.42;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .quote strong {
+      color: var(--kgi-gold);
+    }
+
+    .quote p {
+      color: var(--soft-white);
+      font-size: 15.5px;
+      line-height: 1.8;
+    }
+
+    .bottom-cta {
+      text-align: center;
+      padding: 4px 0 14px;
+    }
+
+    .bottom-cta .cta {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.7;
+      margin-top: 14px;
+    }
+
+    .float-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .orb1 {
+      width: 80px;
+      height: 80px;
+      left: -34px;
+      bottom: 120px;
+      background: rgba(47, 140, 255, 0.24);
+      filter: blur(1px);
+    }
+
+    .orb2 {
+      width: 44px;
+      height: 44px;
+      right: 20px;
+      bottom: 48px;
+      background: rgba(246, 166, 35, 0.32);
+      filter: blur(0.5px);
+    }
+
+    @media (min-width: 760px) {
+      .page {
+        padding: 36px 32px 54px;
+      }
+
+      .hero {
+        min-height: 760px;
+      }
+
+      .pain-wrap {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .module-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .module-card {
+        min-height: 360px;
+      }
+
+      .bottom-cta .cta {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- 第一屏：主視覺 -->
+    <section class="hero">
+      <div class="float-orb orb1"></div>
+      <div class="float-orb orb2"></div>
+
+      <div class="eyebrow">襄理主管力養成</div>
+
+      <h1>
+        <span class="gradient-text">襄理主管力</span><br />
+        升級計畫
+      </h1>
+
+      <div class="hero-subtitle">
+        從自己會做，<br />
+        到帶人做到。
+      </div>
+
+      <p class="hero-desc">
+        四天課程，補上襄理邁向經理前最關鍵的主管基本功。
+        不只會衝業績，更要會增員、會輔導、會訓練、會經營。
+      </p>
+
+      <div class="tag-row">
+        <span class="tag">增員推進</span>
+        <span class="tag">績效管理</span>
+        <span class="tag">訓練輔導</span>
+        <span class="tag">團隊經營</span>
+      </div>
+
+      <a class="cta" href="#modules">查看課程亮點</a>
+    </section>
+
+    <!-- 第二屏：痛點 -->
+    <section class="section">
+      <h2 class="section-title">晉升襄理後，<br />真正的挑戰開始了</h2>
+      <p class="section-lead">
+        襄理的難，不是努力不夠，而是角色變了。
+        從自己做業績，開始要帶著夥伴一起前進。
+      </p>
+
+      <div class="pain-wrap">
+        <div class="pain-card">
+          <h3>想增員</h3>
+          <p>卻不知道怎麼帶夥伴推進。</p>
+        </div>
+
+        <div class="pain-card">
+          <h3>想輔導</h3>
+          <p>卻常常只停在提醒與叮嚀。</p>
+        </div>
+
+        <div class="pain-card">
+          <h3>想晉升</h3>
+          <p>卻還缺一套帶團隊的方法。</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        這堂課，就是把襄理最常卡住的地方，變成可操作的方法。
+      </div>
+    </section>
+
+    <!-- 第三屏：課程內容 -->
+    <section class="section" id="modules">
+      <h2 class="section-title">課程學什麼？</h2>
+      <p class="section-lead">
+        不用背課表，只看能力。襄理最需要的三大主管力，一次補齊。
+      </p>
+
+      <div class="module-grid">
+
+        <article class="module-card">
+          <div class="module-top">
+            <div class="num">01</div>
+            <h3>增員推進力</h3>
+          </div>
+
+          <p class="module-desc">
+            讓增員不只停在邀約，而能協助夥伴把準增往下一步推進。
+          </p>
+
+          <div class="course-label">課程包含</div>
+          <div class="course-tags">
+            <span>準增心聲</span>
+            <span>增員問題拆解</span>
+            <span>說明壽險事業</span>
+            <span>增員選才面談</span>
+          </div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-top">
+            <div class="num">02</div>
+            <h3>訓練輔導力</h3>
+          </div>
+
+          <p class="module-desc">
+            讓主管不只會提醒，而能看出夥伴卡點，教會方法，陪他做到。
+          </p>
+
+          <div class="course-label">課程包含</div>
+          <div class="course-tags">
+            <span>一對一輔導</span>
+            <span>個案輔導</span>
+            <span>陪同拜訪</span>
+            <span>PESOS訓練步驟</span>
+            <span>角色扮演</span>
+          </div>
+        </article>
+
+        <article class="module-card">
+          <div class="module-top">
+            <div class="num">03</div>
+            <h3>團隊經營力</h3>
+          </div>
+
+          <p class="module-desc">
+            讓襄理從個人戰力，升級為團隊戰力，建立邁向經理的經營思維。
+          </p>
+
+          <div class="course-label">課程包含</div>
+          <div class="course-tags">
+            <span>襄理角色定位</span>
+            <span>目標設定</span>
+            <span>活動量管理</span>
+            <span>時間管理</span>
+            <span>激勵溝通</span>
+            <span>下一站經理</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 第四屏：收斂金句 -->
+    <section class="section">
+      <div class="quote">
+        <h2>
+          襄理的價值，<br />
+          不是多做一點，<br />
+          <strong>而是讓團隊多成長一點。</strong>
+        </h2>
+
+        <p>
+          從會做業績，到會帶人成功；<br />
+          從個人戰力，到團隊戰力。
+        </p>
+      </div>
+    </section>
+
+    <!-- 回主管訓練藍圖 -->
+    <section class="bottom-cta">
+      <a class="cta" href="https://kaoruying.github.io/salestraining/">回主管訓練藍圖</a>
+      <p class="small-note">
+        襄理經典基礎班 × 襄理進階班｜四天主管力養成
+      </p>
+    </section>
+
+  </main>
+</body>
+</html>
