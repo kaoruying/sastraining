@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>襄理主管力升級計畫</title>
 
   <style>
@@ -25,13 +25,21 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      max-width: 100%;
     }
 
     html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
     body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      position: relative;
       font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
       background:
         radial-gradient(circle at top left, rgba(47, 140, 255, 0.28), transparent 34%),
@@ -39,13 +47,14 @@
         linear-gradient(145deg, #06152f 0%, #08285a 45%, #001f3f 100%);
       color: var(--white);
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
+      width: 100vw;
+      max-width: 100vw;
       pointer-events: none;
       background-image:
         linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -55,16 +64,24 @@
       z-index: 0;
     }
 
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
     .page {
       position: relative;
       z-index: 1;
-      width: min(100%, 920px);
+      width: 100%;
+      max-width: 920px;
       margin: 0 auto;
       padding: 24px 18px 36px;
+      overflow: hidden;
     }
 
     .section {
       margin-bottom: 28px;
+      width: 100%;
+      overflow: hidden;
     }
 
     .hero {
@@ -74,15 +91,17 @@
       justify-content: center;
       padding: 34px 0 26px;
       position: relative;
+      width: 100%;
+      overflow: hidden;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      width: 240px;
-      height: 240px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      right: -120px;
+      right: -88px;
       top: 110px;
       background: radial-gradient(circle, rgba(246, 166, 35, 0.24), transparent 68%);
       filter: blur(3px);
@@ -92,6 +111,7 @@
     .eyebrow {
       display: inline-flex;
       width: fit-content;
+      max-width: 100%;
       align-items: center;
       gap: 8px;
       color: var(--kgi-gold);
@@ -103,10 +123,12 @@
       background: rgba(246, 166, 35, 0.09);
       border-radius: 999px;
       margin-bottom: 18px;
+      white-space: nowrap;
     }
 
     .eyebrow::before {
       content: "";
+      flex: 0 0 auto;
       width: 7px;
       height: 7px;
       background: var(--kgi-orange);
@@ -121,6 +143,7 @@
       font-weight: 900;
       margin-bottom: 18px;
       text-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+      word-break: keep-all;
     }
 
     .gradient-text {
@@ -135,6 +158,7 @@
       line-height: 1.36;
       font-weight: 800;
       margin-bottom: 14px;
+      word-break: keep-all;
     }
 
     .hero-desc {
@@ -150,9 +174,14 @@
       flex-wrap: wrap;
       gap: 10px;
       margin: 20px 0 28px;
+      width: 100%;
     }
 
     .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
       font-size: 13px;
       font-weight: 700;
       color: #fff8e9;
@@ -161,6 +190,7 @@
       background: linear-gradient(135deg, rgba(246, 166, 35, 0.28), rgba(47, 140, 255, 0.16));
       border: 1px solid rgba(255, 255, 255, 0.18);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+      white-space: nowrap;
     }
 
     .cta {
@@ -168,6 +198,7 @@
       justify-content: center;
       align-items: center;
       width: fit-content;
+      max-width: 100%;
       min-width: 190px;
       min-height: 48px;
       padding: 13px 22px;
@@ -179,6 +210,8 @@
       background: linear-gradient(135deg, #ffd36a 0%, #f6a623 100%);
       box-shadow: 0 12px 30px rgba(246, 166, 35, 0.32);
       transition: transform 0.22s ease, box-shadow 0.22s ease;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .cta:hover {
@@ -192,6 +225,7 @@
       font-weight: 900;
       margin-bottom: 14px;
       letter-spacing: -0.03em;
+      word-break: keep-all;
     }
 
     .section-lead {
@@ -205,10 +239,12 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      width: 100%;
     }
 
     .pain-card {
       position: relative;
+      width: 100%;
       padding: 18px 18px 18px 20px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.08);
@@ -241,6 +277,7 @@
     }
 
     .highlight-box {
+      width: 100%;
       margin-top: 16px;
       padding: 18px;
       border-radius: 24px;
@@ -251,6 +288,7 @@
       line-height: 1.55;
       font-weight: 800;
       text-align: center;
+      overflow-wrap: break-word;
     }
 
     .module-grid {
@@ -258,10 +296,12 @@
       grid-template-columns: 1fr;
       gap: 14px;
       margin-top: 18px;
+      width: 100%;
     }
 
     .module-card {
       position: relative;
+      width: 100%;
       padding: 20px;
       border-radius: 26px;
       background:
@@ -277,8 +317,8 @@
       position: absolute;
       width: 120px;
       height: 120px;
-      right: -60px;
-      bottom: -60px;
+      right: -54px;
+      bottom: -54px;
       border-radius: 50%;
       background: rgba(246, 166, 35, 0.18);
       filter: blur(2px);
@@ -289,6 +329,8 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 10px;
+      width: 100%;
+      min-width: 0;
     }
 
     .num {
@@ -306,9 +348,12 @@
     }
 
     .module-card h3 {
+      flex: 1 1 auto;
+      min-width: 0;
       font-size: 22px;
       font-weight: 900;
       letter-spacing: -0.02em;
+      word-break: keep-all;
     }
 
     .module-desc {
@@ -316,6 +361,8 @@
       font-size: 15.5px;
       line-height: 1.75;
       margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
     }
 
     .course-label {
@@ -323,6 +370,8 @@
       font-size: 13px;
       font-weight: 800;
       margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .course-tags {
@@ -331,9 +380,14 @@
       gap: 8px;
       position: relative;
       z-index: 1;
+      width: 100%;
     }
 
     .course-tags span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
       font-size: 12.5px;
       line-height: 1;
       color: #eaf4ff;
@@ -341,10 +395,12 @@
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.09);
       border: 1px solid rgba(255, 255, 255, 0.14);
+      white-space: nowrap;
     }
 
     .quote {
       position: relative;
+      width: 100%;
       padding: 30px 20px;
       border-radius: 30px;
       text-align: center;
@@ -361,6 +417,7 @@
       content: "";
       position: absolute;
       width: 140px;
+      max-width: 70%;
       height: 2px;
       background: linear-gradient(90deg, transparent, rgba(255, 211, 106, 0.72), transparent);
       left: 50%;
@@ -381,6 +438,7 @@
       font-weight: 900;
       margin-bottom: 16px;
       letter-spacing: -0.04em;
+      word-break: keep-all;
     }
 
     .quote strong {
@@ -396,6 +454,8 @@
     .bottom-cta {
       text-align: center;
       padding: 4px 0 14px;
+      width: 100%;
+      overflow: hidden;
     }
 
     .bottom-cta .cta {
@@ -420,7 +480,7 @@
     .orb1 {
       width: 80px;
       height: 80px;
-      left: -34px;
+      left: -22px;
       bottom: 120px;
       background: rgba(47, 140, 255, 0.24);
       filter: blur(1px);
@@ -433,6 +493,101 @@
       bottom: 48px;
       background: rgba(246, 166, 35, 0.32);
       filter: blur(0.5px);
+    }
+
+    @media (max-width: 420px) {
+      .page {
+        padding: 22px 16px 34px;
+      }
+
+      .hero {
+        min-height: 88vh;
+        padding-top: 28px;
+      }
+
+      .hero::after {
+        width: 190px;
+        height: 190px;
+        right: -74px;
+        top: 96px;
+      }
+
+      h1 {
+        font-size: clamp(34px, 10.5vw, 48px);
+      }
+
+      .hero-desc {
+        font-size: 15.5px;
+      }
+
+      .tag-row {
+        gap: 8px;
+      }
+
+      .tag {
+        font-size: 12.5px;
+        padding: 8px 10px;
+      }
+
+      .cta {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .module-card {
+        padding: 18px;
+      }
+
+      .module-card h3 {
+        font-size: 21px;
+      }
+
+      .course-tags {
+        gap: 7px;
+      }
+
+      .course-tags span {
+        font-size: 12px;
+        padding: 8px 8px;
+      }
+
+      .highlight-box {
+        font-size: 17px;
+      }
+
+      .quote {
+        padding: 28px 18px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      .module-top {
+        gap: 10px;
+      }
+
+      .num {
+        width: 36px;
+        height: 36px;
+      }
+
+      .module-card h3 {
+        font-size: 20px;
+      }
+
+      .course-tags span {
+        white-space: normal;
+        line-height: 1.25;
+      }
     }
 
     @media (min-width: 760px) {
