@@ -26,6 +26,7 @@
       margin: 0;
       padding: 0;
       max-width: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -33,6 +34,13 @@
       max-width: 100%;
       overflow-x: hidden;
       scroll-behavior: smooth;
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      -webkit-touch-callout: none;
     }
 
     body {
@@ -47,6 +55,39 @@
         linear-gradient(145deg, #06152f 0%, #08285a 45%, #001f3f 100%);
       color: var(--white);
       min-height: 100vh;
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      -webkit-touch-callout: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    div,
+    span,
+    li,
+    a,
+    article,
+    section {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    img,
+    svg,
+    canvas,
+    video {
+      max-width: 100%;
+      pointer-events: none;
+      -webkit-user-drag: none;
+      user-drag: none;
     }
 
     body::before {
@@ -780,5 +821,50 @@
     </section>
 
   </main>
+
+  <script>
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener("copy", function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener("cut", function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener("selectstart", function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener("dragstart", function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener("keydown", function(e) {
+      const key = e.key.toLowerCase();
+
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        ["c", "x", "a", "s", "u", "p"].includes(key)
+      ) {
+        e.preventDefault();
+      }
+
+      if (e.key === "F12") {
+        e.preventDefault();
+      }
+
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.shiftKey &&
+        ["i", "j", "c"].includes(key)
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
