@@ -351,6 +351,8 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
       overflow: hidden;
+      isolation: isolate;
+      clip-path: inset(0 round 26px);
     }
 
     .module-card::after {
@@ -361,8 +363,14 @@
       right: -54px;
       bottom: -54px;
       border-radius: 50%;
-      background: rgba(246, 166, 35, 0.18);
-      filter: blur(2px);
+      background: radial-gradient(circle, rgba(246, 166, 35, 0.26) 0%, rgba(246, 166, 35, 0.12) 48%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .module-card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .module-top {
@@ -577,6 +585,7 @@
 
       .module-card {
         padding: 18px;
+        clip-path: inset(0 round 26px);
       }
 
       .module-card h3 {
@@ -662,7 +671,6 @@
 <body>
   <main class="page">
 
-    <!-- 第一屏：主視覺 -->
     <section class="hero">
       <div class="float-orb orb1"></div>
       <div class="float-orb orb2"></div>
@@ -694,7 +702,6 @@
       <a class="cta" href="#modules">查看課程亮點</a>
     </section>
 
-    <!-- 第二屏：痛點 -->
     <section class="section">
       <h2 class="section-title">晉升襄理後，<br />真正的挑戰開始了</h2>
       <p class="section-lead">
@@ -724,7 +731,6 @@
       </div>
     </section>
 
-    <!-- 第三屏：課程內容 -->
     <section class="section" id="modules">
       <h2 class="section-title">課程學什麼？</h2>
       <p class="section-lead">
@@ -796,7 +802,6 @@
       </div>
     </section>
 
-    <!-- 第四屏：收斂金句 -->
     <section class="section">
       <div class="quote">
         <h2>
@@ -812,7 +817,6 @@
       </div>
     </section>
 
-    <!-- 回主管訓練藍圖 -->
     <section class="bottom-cta">
       <a class="cta" href="https://kaoruying.github.io/salestraining/">回主管訓練藍圖</a>
       <p class="small-note">
